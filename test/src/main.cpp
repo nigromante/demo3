@@ -48,7 +48,7 @@ int main() {
   std::string dataFile = "./data/data.txt";
   std::string programFile = "./data/a.escr23";
   std::string programName = "a";
-  std::string programDescription = "a.escr23";
+  std::string programDescription = "testing a.escr23";
 
   Init();
 
