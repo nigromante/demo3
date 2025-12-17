@@ -1,6 +1,7 @@
 #ifndef ESCR23_HPP_
 #define ESCR23_HPP_
 
+#include "Escr23Params.hpp"
 #include <string>
 #include <vector>
 
@@ -19,24 +20,12 @@ struct Line {
   std::vector<Token> tokens;
 };
 
-class Escr23Params {
-public:
-  std::string name;
-  std::string description;
-  std::string program_path;
-  std::string program_content;
-
-  std::string data;
-};
-
 class Escr23 {
 public:
   std::string Name() const;
   std::string Version() const;
 
-  void SetName(std::string name, std::string programDesciption);
-  void SetProgram(std::string content);
-  void SetData(const std::string &data);
+  Escr23(Escr23Params params);
   void Transform();
   void LinesTrace();
   std::string Result();
@@ -44,12 +33,8 @@ public:
 private:
   std::vector<Token> LineToTokens(const std::string &content);
   void StringToLines();
-  Escr23Params param;
+  Escr23Params m_params;
 
-  std::string m_name;
-  std::string m_description;
-  std::string m_data;
-  std::string m_program;
   std::vector<Line> m_lines;
   std::string m_salida;
 };

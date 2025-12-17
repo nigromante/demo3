@@ -1,42 +1,32 @@
 #include <stddef.h>
 
 #include "Escr23.hpp"
+#include "Escr23Params.hpp"
 #include "File.hpp"
 #include <iostream>
 
-void Init() {
+#define dataFile "./data/data.txt"
+#define programFile "./data/a.escr23"
 
-  Nigromante::Escr23 escr23;
+using Nigromante::Escr23;
 
-  std::cout << "Lib: " << escr23.Name() << " " << escr23.Version() << std::endl
-            << std::endl;
+std::string Work(Nigromante::Escr23Params params) {
+  Nigromante::Escr23 *escr23 = new Nigromante::Escr23(params);
+  escr23->LinesTrace();
+  escr23->Transform();
+  std::string result = escr23->Result();
+  delete escr23;
+  return result;
 }
 
 std::string LoadProgram(const std::string &name) {
   std::cout << "Load Program : " << name << std::endl;
-
   Nigromante::File file;
   return file.ReadFile(name);
 }
 
-std::string Work(std::string programName, std::string programDescription,
-                 std::string program, std::string data) {
-
-  Nigromante::Escr23 escr23;
-
-  escr23.SetName(programName, programDescription);
-  escr23.SetProgram(program);
-  escr23.SetData(data);
-  escr23.LinesTrace();
-  escr23.Transform();
-
-  return escr23.Result();
-}
-
 std::string ReadData(std::string filename) {
-
   Nigromante::File file;
-
   std::cout << "Read File : " << filename << std::endl;
   std::string data = file.ReadFile(filename);
   std::cout << "Data: " << data << std::endl << std::endl;
@@ -44,18 +34,14 @@ std::string ReadData(std::string filename) {
 }
 
 int main() {
+  Nigromante::Escr23Params params;
+  params.name = "Testing";
+  params.description = "Testing program 1";
+  params.program_path = programFile;
+  params.program_content = LoadProgram(programFile);
+  params.data = ReadData(dataFile);
 
-  std::string dataFile = "./data/data.txt";
-  std::string programFile = "./data/a.escr23";
-  std::string programName = "a";
-  std::string programDescription = "testing a.escr23";
-
-  Init();
-
-  std::string programContent = LoadProgram(programFile);
-  std::string data = ReadData(dataFile);
-  std::string salida =
-      Work(programName, programDescription, programContent, data);
+  std::string salida = Work(params);
 
   std::cout << "Salida: " << std::endl << salida << std::endl;
 
