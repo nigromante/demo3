@@ -19,6 +19,16 @@ struct Line {
   std::vector<Token> tokens;
 };
 
+class Escr23Params {
+public:
+  std::string name;
+  std::string description;
+  std::string program_path;
+  std::string program_content;
+
+  std::string data;
+};
+
 class Escr23 {
 public:
   std::string Name() const;
@@ -34,6 +44,7 @@ public:
 private:
   std::vector<Token> LineToTokens(const std::string &content);
   void StringToLines();
+  Escr23Params param;
 
   std::string m_name;
   std::string m_description;
