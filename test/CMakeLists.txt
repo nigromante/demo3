@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 
 set(TARGET test)
-set(LIBS escr23)
+set(LIBS escr23 common)
 set(CMAKE_BUILD_TYPE Debug)
 
 file(GLOB SOURCES src/*)
