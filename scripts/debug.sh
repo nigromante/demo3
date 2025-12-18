@@ -2,4 +2,4 @@
 
 cmake --build ./debug --config Debug
 echo -----------------------------
-lldb-20 ./debug/test/test
+lldb-20 ./debug/Nigromante/test/test
