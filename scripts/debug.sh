@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cmake --build ./debug --config Debug
+cmake --build ./build/debug --config Debug
 echo -----------------------------
-lldb-20 ./debug/Nigromante/test/test
+lldb-20 ./build/debug/Nigromante/test/test

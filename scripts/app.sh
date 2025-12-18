@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cmake --build ./build
+cmake --build ./build/release
 echo -----------------------------
-./build/Nigromante/test/test $1
+./build/release/Nigromante/test/test $1

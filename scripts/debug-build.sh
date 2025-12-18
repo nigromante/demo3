@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf debug
-cmake -S . -B debug -DCMAKE_BUILD_TYPE=Debug
+rm -rf ./build/debug
+cmake -S . -B ./build/debug -DCMAKE_BUILD_TYPE=Debug
 
 

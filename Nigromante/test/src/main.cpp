@@ -10,16 +10,6 @@
 
 using Nigromante::Escr23;
 
-std::string Work(Nigromante::Escr23Params *params) {
-  Escr23 *escr23 = new Escr23(params);
-  escr23->LinesTrace();
-  escr23->Transform();
-  std::string result = escr23->Result();
-  delete escr23;
-  delete params;
-  return result;
-}
-
 std::string LoadFile(const std::string &name) {
   Nigromante::File file;
   return file.ReadFile(name);
@@ -36,7 +26,17 @@ Nigromante::Escr23Params *LoadTest(char *arg) {
 }
 
 int main(int argc, char **argv) {
-  std::string salida = Work(LoadTest(argv[1]));
+
+  Nigromante::Escr23Params *params = LoadTest(argv[1]);
+
+  Escr23 *escr23 = new Escr23(params);
+  escr23->LinesTrace();
+  escr23->Transform();
+  std::string salida = escr23->Result();
+  delete escr23;
+
+  delete params;
+
   std::cout << "Salida: " << std::endl << salida << std::endl;
   return 0;
 }

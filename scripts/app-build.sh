@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf build
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+rm -rf ./build/release
+cmake -S . -B ./build/release -DCMAKE_BUILD_TYPE=Release
 
 
