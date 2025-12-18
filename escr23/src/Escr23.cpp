@@ -8,7 +8,7 @@ std::string Escr23::Name() const { return ESCR23_NAME; }
 
 std::string Escr23::Version() const { return ESCR23_VERSION; }
 
-Escr23::Escr23(Escr23Params params) {
+Escr23::Escr23(Escr23Params *params) {
   m_params = params;
   StringToLines();
 }
@@ -35,13 +35,13 @@ void Escr23::StringToLines() {
   int markend = 0;
   int line = 1;
 
-  for (int i = 0; i < m_params.program_content.length(); ++i) {
-    if (m_params.program_content[i] == '\n') {
+  for (int i = 0; i < m_params->program_content.length(); ++i) {
+    if (m_params->program_content[i] == '\n') {
       markend = i;
       if (markend != markbegin &&
-          m_params.program_content.at(markbegin) != '#') {
+          m_params->program_content.at(markbegin) != '#') {
         std::string line_content =
-            m_params.program_content.substr(markbegin, markend - markbegin);
+            m_params->program_content.substr(markbegin, markend - markbegin);
         m_lines.push_back({line_content, line, LineToTokens(line_content)});
       }
       markbegin = (i + 1);
@@ -51,7 +51,7 @@ void Escr23::StringToLines() {
 }
 
 void Escr23::LinesTrace() {
-  std::cout << "File !! : " << m_params.name << " (" << m_params.description
+  std::cout << "File !! : " << m_params->name << " (" << m_params->description
             << ")" << std::endl;
   for (Line line : m_lines) {
     std::cout << "Processed Line(" << line.numberLine << "): " << line.content
@@ -64,4 +64,4 @@ void Escr23::LinesTrace() {
 
 std::string Escr23::Result() { return m_salida; }
 
-void Escr23::Transform() { m_salida = m_params.program_content; }
+void Escr23::Transform() { m_salida = m_params->program_content; }

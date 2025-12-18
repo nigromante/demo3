@@ -25,7 +25,7 @@ public:
   std::string Name() const;
   std::string Version() const;
 
-  Escr23(Escr23Params params);
+  Escr23(Escr23Params *params);
   void Transform();
   void LinesTrace();
   std::string Result();
@@ -33,7 +33,7 @@ public:
 private:
   std::vector<Token> LineToTokens(const std::string &content);
   void StringToLines();
-  Escr23Params m_params;
+  Escr23Params *m_params;
 
   std::vector<Line> m_lines;
   std::string m_salida;

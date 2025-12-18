@@ -2,4 +2,4 @@
 
 cmake --build ./build
 echo -----------------------------
-./build/test/test
+./build/test/test $1

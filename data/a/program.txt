@@ -1,0 +1,12 @@
+
+#inicio
+
+
+"I-"  ## salida a Impresora
+
+setind 200  # Area de datos
+v 20 10 10
+fin
+
+
+#end
