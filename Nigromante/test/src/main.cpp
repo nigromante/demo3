@@ -17,19 +17,19 @@ std::string LoadFile(const std::string &name) {
   return file.ReadFile(name);
 }
 
-Nigromante::Escr23Params *LoadTest(mINI::INIStructure tini) {
+Nigromante::Escr23Params *LoadTest(std::string path, mINI::INIStructure tini) {
   Nigromante::Escr23Params *params = new Nigromante::Escr23Params();
 
   params->name = tini["proyecto"]["name"];
   params->description = tini["proyecto"]["description"];
-  params->program_path = tini["proyecto"]["program"];
-  params->program_content = LoadFile(tini["proyecto"]["program"]);
-  params->data = LoadFile(tini["proyecto"]["data"]);
+  params->program_path = path + tini["proyecto"]["program"];
+  params->program_content = LoadFile(params->program_path);
+  params->data = LoadFile(path + tini["proyecto"]["data"]);
   return params;
 }
 
-mINI::INIStructure ReadIni(std::string filename) {
-  std::string iniFileName = "./data/" + filename + "/info.ini";
+mINI::INIStructure ReadIni(std::string path) {
+  std::string iniFileName = path + "/info.ini";
 
   mINI::INIFile file(iniFileName);
   mINI::INIStructure ini;
@@ -39,7 +39,10 @@ mINI::INIStructure ReadIni(std::string filename) {
 
 int main(int argc, char **argv) {
 
-  Nigromante::Escr23Params *params = LoadTest(ReadIni(argv[1]));
+  std::string file = argv[1];
+  std::string path = "./data/" + file + "/";
+
+  Nigromante::Escr23Params *params = LoadTest(path, ReadIni(path));
 
   Escr23 *escr23 = new Escr23(params);
   escr23->LinesTrace();
