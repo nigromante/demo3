@@ -7,9 +7,6 @@
 #include <cstring>
 #include <iostream>
 
-#define dataFile "./data/data.txt"
-#define programFile "./data/a.escr23"
-
 using Nigromante::Escr23;
 
 std::string LoadFile(const std::string &name) {
