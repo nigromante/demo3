@@ -41,18 +41,18 @@ int main(int argc, char **argv) {
 
   Nigromante::Escr23Params *params = LoadTest(path, ReadIni(path));
 
+  std::cout << "Entrada: " << std::endl << params->data << std::endl;
+  std::cout << "-------------------------" << std::endl;
+
   Escr23 *escr23 = new Escr23(params);
   escr23->LinesTrace();
   escr23->Transform();
   std::string salida = escr23->Result();
   delete escr23;
-
   delete params;
 
   std::cout << "-------------------------" << std::endl;
-  std::cout << "Entrada: " << std::endl << params->data << std::endl;
-
-  std::cout << "-------------------------" << std::endl;
   std::cout << "Salida: " << std::endl << salida << std::endl;
+
   return 0;
 }
