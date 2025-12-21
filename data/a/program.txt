@@ -1,5 +1,5 @@
 
-#inicio
+#inicio  ./data/a/program.txt
 
 
 "I-"  ## salida a Impresora

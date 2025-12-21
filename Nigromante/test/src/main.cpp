@@ -3,6 +3,8 @@
 #include "Escr23.hpp"
 #include "Escr23Params.hpp"
 #include "File.hpp"
+#include "ini.hpp"
+#include <cstring>
 #include <iostream>
 
 #define dataFile "./data/data.txt"
@@ -15,19 +17,29 @@ std::string LoadFile(const std::string &name) {
   return file.ReadFile(name);
 }
 
-Nigromante::Escr23Params *LoadTest(char *arg) {
+Nigromante::Escr23Params *LoadTest(mINI::INIStructure tini) {
   Nigromante::Escr23Params *params = new Nigromante::Escr23Params();
-  params->name = "Testing";
-  params->description = "Testing program 1";
-  params->program_path = programFile;
-  params->program_content = LoadFile(programFile);
-  params->data = LoadFile(dataFile);
+
+  params->name = tini["proyecto"]["name"];
+  params->description = tini["proyecto"]["description"];
+  params->program_path = tini["proyecto"]["program"];
+  params->program_content = LoadFile(tini["proyecto"]["program"]);
+  params->data = LoadFile(tini["proyecto"]["data"]);
   return params;
+}
+
+mINI::INIStructure ReadIni(std::string filename) {
+  std::string iniFileName = "./data/" + filename + "/info.ini";
+
+  mINI::INIFile file(iniFileName);
+  mINI::INIStructure ini;
+  file.read(ini);
+  return ini;
 }
 
 int main(int argc, char **argv) {
 
-  Nigromante::Escr23Params *params = LoadTest(argv[1]);
+  Nigromante::Escr23Params *params = LoadTest(ReadIni(argv[1]));
 
   Escr23 *escr23 = new Escr23(params);
   escr23->LinesTrace();
@@ -37,6 +49,10 @@ int main(int argc, char **argv) {
 
   delete params;
 
+  std::cout << "-------------------------" << std::endl;
+  std::cout << "Entrada: " << std::endl << params->data << std::endl;
+
+  std::cout << "-------------------------" << std::endl;
   std::cout << "Salida: " << std::endl << salida << std::endl;
   return 0;
 }

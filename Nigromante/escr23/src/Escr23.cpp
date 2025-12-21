@@ -51,8 +51,6 @@ void Escr23::StringToLines() {
 }
 
 void Escr23::LinesTrace() {
-  std::cout << "File !! : " << m_params->name << " (" << m_params->description
-            << ")" << std::endl;
   for (Line line : m_lines) {
     std::cout << "Processed Line(" << line.numberLine << "): " << line.content
               << std::endl;
