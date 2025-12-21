@@ -22,6 +22,10 @@ Nigromante::Escr23Params *LoadTest(std::string path, mINI::INIStructure tini) {
   params->program_path = path + tini["proyecto"]["program"];
   params->program_content = LoadFile(params->program_path);
   params->data = LoadFile(path + tini["proyecto"]["data"]);
+
+  std::cout << "Entrada: " << std::endl << params->data << std::endl;
+  std::cout << "-------------------------" << std::endl;
+
   return params;
 }
 
@@ -40,9 +44,6 @@ int main(int argc, char **argv) {
   std::string path = "./data/" + file + "/";
 
   Nigromante::Escr23Params *params = LoadTest(path, ReadIni(path));
-
-  std::cout << "Entrada: " << std::endl << params->data << std::endl;
-  std::cout << "-------------------------" << std::endl;
 
   Escr23 *escr23 = new Escr23(params);
   escr23->LinesTrace();
